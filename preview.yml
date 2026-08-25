@@ -1,0 +1,16 @@
+display:
+  model: waveshare_7_5_bw
+  palette: bw
+
+  columns: 4
+  rows: 2
+
+fixture: default.yml
+
+spans:
+  - { columns: 4, rows: 2 }
+  - { columns: 2, rows: 2 }
+  - { columns: 4, rows: 1 }
+  - { columns: 2, rows: 1 }
+  - { columns: 1, rows: 2 }
+  - { columns: 1, rows: 1 }

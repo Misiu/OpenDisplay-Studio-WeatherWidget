@@ -1,0 +1,12 @@
+id: weather
+name: Weather
+version: 1
+description: TRMNL Weather compatibility test
+framework: 3.2.0
+template: widget.liquid
+
+defaults: {}
+
+fields: []
+
+dataRequirements: []
