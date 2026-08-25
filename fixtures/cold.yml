@@ -1,0 +1,24 @@
+data:
+  location: Tromso
+  current:
+    temperature: -8
+    feels_like: -15
+    humidity: 73
+    condition: Snow Showers
+    observed_at: 07:05
+    icon: https://trmnl.com/images/plugins/weather/wi-snow.svg
+  forecast:
+    - date: Fri
+      condition: Heavy Snow
+      icon: https://trmnl.com/images/plugins/weather/wi-snow-wind.svg
+      low: -14
+      high: -6
+      uv: 0
+      uv_label: Low
+    - date: Sat
+      condition: Cloudy
+      icon: https://trmnl.com/images/plugins/weather/wi-cloudy.svg
+      low: -16
+      high: -9
+      uv: 0
+      uv_label: Low
