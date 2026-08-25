@@ -1,12 +1,25 @@
 id: weather
 name: Weather
 version: 1
-description: TRMNL Weather compatibility test
+description: Responsive weather widget for OpenDisplay Studio, inspired by the TRMNL Weather layout
 framework: 3.2.0
 template: widget.liquid
 
-defaults: {}
+defaults:
+  show_humidity: true
+  show_feels_like: true
+  show_forecast: true
 
-fields: []
+fields:
+  - key: show_humidity
+    label: Show humidity
+    type: boolean
+  - key: show_feels_like
+    label: Show feels like
+    type: boolean
+  - key: show_forecast
+    label: Show forecast
+    type: boolean
 
-dataRequirements: []
+dataRequirements:
+  - type: weather
