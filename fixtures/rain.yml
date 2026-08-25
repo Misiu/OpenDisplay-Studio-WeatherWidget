@@ -1,0 +1,24 @@
+data:
+  location: Gdansk
+  current:
+    temperature: 12
+    feels_like: 9
+    humidity: 88
+    condition: Heavy Rain
+    observed_at: 08:15
+    icon: https://trmnl.com/images/plugins/weather/wi-rain.svg
+  forecast:
+    - date: Tue
+      condition: Rain Showers
+      icon: https://trmnl.com/images/plugins/weather/wi-showers.svg
+      low: 8
+      high: 13
+      uv: 1
+      uv_label: Low
+    - date: Wed
+      condition: Cloudy
+      icon: https://trmnl.com/images/plugins/weather/wi-cloudy.svg
+      low: 7
+      high: 14
+      uv: 2
+      uv_label: Low
