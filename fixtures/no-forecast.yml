@@ -1,0 +1,12 @@
+data:
+  weather:
+    entity_id: weather.home
+    name: Home
+    condition: rainy
+    condition_label: Rain
+    icon: https://trmnl.com/images/plugins/weather/wi-rain.svg
+    temperature: 12
+    temperature_unit: "°C"
+    apparent_temperature: 9
+    humidity: 88
+    updated_at: 18:02

@@ -1,5 +1,9 @@
 {% assign current = data.weather %}
-{% assign forecast = current.forecast %}
+{% if current contains 'forecast' %}
+  {% assign forecast = current.forecast %}
+{% else %}
+  {% assign forecast = nil %}
+{% endif %}
 {% assign today = nil %}
 {% assign tomorrow = nil %}
 {% for forecast_day in forecast limit: 2 %}
@@ -64,7 +68,7 @@
         </div>
       </div>
 
-      {% if config.showForecast and forecast.size > 0 %}
+      {% if config.showForecast and forecast != nil and forecast != empty %}
       <div class="divider"></div>
       <div class="grid">
         <div class="col gap--large">
@@ -217,7 +221,7 @@
           </div>
         </div>
       </div>
-      {% if config.showForecast and forecast.size > 0 %}
+      {% if config.showForecast and forecast != nil and forecast != empty %}
       <div class="divider"></div>
       <div class="grid grid--cols-2 portrait:grid--cols-1 portrait:gap">
         {% for day in forecast limit: 2 %}
