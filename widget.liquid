@@ -1,7 +1,14 @@
 {% assign current = data.weather %}
 {% assign forecast = current.forecast %}
-{% assign today = forecast[0] %}
-{% assign tomorrow = forecast[1] %}
+{% assign today = nil %}
+{% assign tomorrow = nil %}
+{% for forecast_day in forecast limit: 2 %}
+  {% if forloop.first %}
+    {% assign today = forecast_day %}
+  {% else %}
+    {% assign tomorrow = forecast_day %}
+  {% endif %}
+{% endfor %}
 
 <div class="od-weather">
   <section class="od-weather__composition od-weather__composition--expansive" data-weather-composition="expansive">
