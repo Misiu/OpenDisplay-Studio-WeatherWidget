@@ -1,6 +1,6 @@
 id: weather
 name: Weather
-version: 2
+version: 3
 description: Responsive weather widget for OpenDisplay Studio, inspired by the TRMNL Weather layout
 framework: 3.2.0
 template: widget.liquid

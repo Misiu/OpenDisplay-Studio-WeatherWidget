@@ -426,6 +426,11 @@
     .od-weather__composition--minimal { display: grid; }
   }
 
+  @container weather (max-width: 360px) and (max-height: 220px) {
+    .od-weather__composition { display: none; }
+    .od-weather__composition--minimal { display: grid; }
+  }
+
   @container weather (max-width: 240px) and (min-height: 300px) {
     .od-weather__composition--compact .grid {
       grid-template-columns: minmax(0, 1fr);
