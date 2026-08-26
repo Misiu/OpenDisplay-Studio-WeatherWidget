@@ -1,24 +1,33 @@
 data:
-  location: Las Vegas
-  current:
-    temperature: 77
-    feels_like: 80
-    humidity: 45
-    condition: Sunny
-    observed_at: 5:55 PM
+  weather:
+    entity_id: weather.home
+    name: Las Vegas
+    condition: sunny
+    condition_label: Sunny
     icon: https://trmnl.com/images/plugins/weather/wi-day-sunny.svg
-  forecast:
-    - date: Jul 9
-      condition: Partly cloudy
-      icon: https://trmnl.com/images/plugins/weather/wi-day-cloudy.svg
-      low: 70
-      high: 86
-      uv: 8
-      uv_label: High
-    - date: Jul 10
-      condition: Light Rain
-      icon: https://trmnl.com/images/plugins/weather/wi-day-showers.svg
-      low: 65
-      high: 79
-      uv: 5
-      uv_label: Moderate
+    temperature: 77
+    temperature_unit: "°F"
+    apparent_temperature: 80
+    humidity: 45
+    updated_at: 5:55 PM
+    forecast:
+      - datetime: "2026-07-09T12:00:00-07:00"
+        date_label: Jul 9
+        condition: partlycloudy
+        condition_label: Partly cloudy
+        icon: https://trmnl.com/images/plugins/weather/wi-day-cloudy.svg
+        templow: 69.5
+        temperature: 86.2
+        uv_index: 8
+        uv_label: High
+        precipitation_probability: 10
+      - datetime: "2026-07-10T12:00:00-07:00"
+        date_label: Jul 10
+        condition: rainy
+        condition_label: Light rain
+        icon: https://trmnl.com/images/plugins/weather/wi-day-showers.svg
+        templow: 65.2
+        temperature: 79.1
+        uv_index: 5
+        uv_label: Moderate
+        precipitation_probability: 65

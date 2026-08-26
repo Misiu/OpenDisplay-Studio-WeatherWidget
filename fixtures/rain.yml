@@ -1,24 +1,33 @@
 data:
-  location: Gdansk
-  current:
-    temperature: 12
-    feels_like: 9
-    humidity: 88
-    condition: Heavy Rain
-    observed_at: 08:15
+  weather:
+    entity_id: weather.home
+    name: Piła
+    condition: pouring
+    condition_label: Heavy rain
     icon: https://trmnl.com/images/plugins/weather/wi-rain.svg
-  forecast:
-    - date: Tue
-      condition: Rain Showers
-      icon: https://trmnl.com/images/plugins/weather/wi-showers.svg
-      low: 8
-      high: 13
-      uv: 1
-      uv_label: Low
-    - date: Wed
-      condition: Cloudy
-      icon: https://trmnl.com/images/plugins/weather/wi-cloudy.svg
-      low: 7
-      high: 14
-      uv: 2
-      uv_label: Low
+    temperature: 12
+    temperature_unit: "°C"
+    apparent_temperature: 9
+    humidity: 88
+    updated_at: 08:15
+    forecast:
+      - datetime: "2026-08-26T12:00:00+02:00"
+        date_label: Tue
+        condition: rainy
+        condition_label: Rain showers
+        icon: https://trmnl.com/images/plugins/weather/wi-showers.svg
+        templow: 8
+        temperature: 13
+        uv_index: 1
+        uv_label: Low
+        precipitation_probability: 90
+      - datetime: "2026-08-27T12:00:00+02:00"
+        date_label: Wed
+        condition: cloudy
+        condition_label: Cloudy
+        icon: https://trmnl.com/images/plugins/weather/wi-cloudy.svg
+        templow: 7
+        temperature: 14
+        uv_index: 2
+        uv_label: Low
+        precipitation_probability: 35

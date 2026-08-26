@@ -1,84 +1,327 @@
+{% assign current = data.weather %}
+{% assign forecast = current.forecast %}
+{% assign today = forecast[0] %}
+{% assign tomorrow = forecast[1] %}
+
 <div class="od-weather">
-  <div class="od-weather__body">
-    <section class="od-weather__current">
-      <div class="od-weather__hero-icon">
-        <img class="image image--adaptive" alt="{{ data.current.condition }}" src="{{ data.current.icon }}">
+  <section class="od-weather__composition od-weather__composition--expansive" data-weather-composition="expansive">
+    <div class="layout layout--col gap--space-between">
+      <div class="grid grid--cols-6">
+        <div class="row row--center col--span-2 portrait:col--span-6 col--end">
+          <img class="image--adaptive w--[22cqw] h--auto portrait:w--auto portrait:h--[40cqh] lg:w--[28cqw] lg:h--[28cqw] lg:portrait:w--auto lg:portrait:h--[33cqh]" alt="{{ current.condition_label }}" src="{{ current.icon }}">
+        </div>
+        <div class="col col--span-2 portrait:col--span-3 col--end">
+          <div class="item grow">
+            <div class="meta"></div>
+            <div class="content">
+              <span class="value value--xxxlarge lg:value--giga" data-fit-value="true">{{ current.temperature }}°</span>
+              <span class="label">Temperature ({{ current.updated_at }})</span>
+            </div>
+          </div>
+        </div>
+        <div class="col col--span-2 portrait:col--span-3 col--end gap--medium">
+          {% if config.showFeelsLike and current.apparent_temperature != nil %}
+          <div class="item">
+            <div class="meta"></div>
+            <div class="icon">
+              <img class="image--adaptive w--[6cqw] h--[6cqw] portrait:w--[10cqw] portrait:h--[10cqw]" alt="Temperature" src="https://trmnl.com/images/plugins/weather/wi-thermometer.svg">
+            </div>
+            <div class="content">
+              <span class="value value--xsmall lg:value--large">{{ current.apparent_temperature }}°</span>
+              <span class="label">Feels Like</span>
+            </div>
+          </div>
+          {% endif %}
+          {% if config.showHumidity and current.humidity != nil %}
+          <div class="item">
+            <div class="meta"></div>
+            <div class="icon">
+              <img class="image--adaptive w--[6cqw] h--[6cqw] portrait:w--[10cqw] portrait:h--[10cqw]" alt="Humidity" src="https://trmnl.com/images/plugins/weather/wi-raindrops.svg">
+            </div>
+            <div class="content">
+              <span class="value value--xsmall lg:value--large">{{ current.humidity }}%</span>
+              <span class="label">Humidity</span>
+            </div>
+          </div>
+          {% endif %}
+          <div class="item">
+            <div class="meta"></div>
+            <div class="icon">
+              <img class="image--adaptive w--[6cqw] h--[6cqw] portrait:w--[10cqw] portrait:h--[10cqw]" alt="{{ current.condition_label }}" src="{{ current.icon }}">
+            </div>
+            <div class="content">
+              <span class="value value--xsmall lg:value--base">{{ current.condition_label }}</span>
+              <span class="label">Right Now</span>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="od-weather__temperature">
-        <div class="od-weather__temperature-value">{{ data.current.temperature }}°</div>
-        <div class="od-weather__temperature-label">Temperature ({{ data.current.observed_at }})</div>
+      {% if config.showForecast and forecast.size > 0 %}
+      <div class="divider"></div>
+      <div class="grid">
+        <div class="col gap--large">
+          {% for day in forecast limit: 2 %}
+          <div class="grid">
+            <div class="item col--span-3 grow">
+              <div class="meta"></div>
+              <div class="icon">
+                <img class="image--adaptive w--[6cqw] h--[6cqw] portrait:w--[10cqw] portrait:h--[10cqw]" alt="{{ day.condition_label }}" src="{{ day.icon }}">
+              </div>
+              <div class="content">
+                <span class="value value--xsmall lg:value--base">{{ day.condition_label }}</span>
+                <span class="label">{{ day.date_label }}</span>
+              </div>
+            </div>
+            {% if day.uv_index != nil or day.precipitation_probability != nil %}
+            <div class="item col--span-3 grow">
+              <div class="meta"></div>
+              <div class="icon portrait:hidden">
+                <img class="image--adaptive w--[6cqw] h--[6cqw] portrait:w--[10cqw] portrait:h--[10cqw]" alt="{% if day.uv_index != nil %}UV index{% else %}Precipitation probability{% endif %}" src="{% if day.uv_index != nil %}https://trmnl.com/images/plugins/weather/wi-hot.svg{% else %}https://trmnl.com/images/plugins/weather/wi-raindrops.svg{% endif %}">
+              </div>
+              <div class="content">
+                <span class="value value--xsmall lg:value--base">{% if day.uv_index != nil %}{{ day.uv_label }} ({{ day.uv_index }}){% else %}{{ day.precipitation_probability }}%{% endif %}</span>
+                <span class="label">{% if day.uv_index != nil %}UV{% else %}Precipitation{% endif %}</span>
+              </div>
+            </div>
+            {% endif %}
+            <div class="row col--span-3 grow">
+              <div class="item">
+                <div class="meta"></div>
+                <div class="icon portrait:hidden">
+                  <img class="image--adaptive w--[6cqw] h--[6cqw] portrait:w--[10cqw] portrait:h--[10cqw]" alt="Temperature" src="https://trmnl.com/images/plugins/weather/wi-thermometer.svg">
+                </div>
+                <div class="content">
+                  <div class="flex flex--row gap--xlarge portrait:gap">
+                    <div class="content">
+                      <span class="value value--xsmall lg:value--base">{% if day.templow != nil %}{{ day.templow | round }}°{% else %}—{% endif %}</span>
+                      <span class="label">Low</span>
+                    </div>
+                    <div class="content">
+                      <span class="value value--xsmall lg:value--base">{{ day.temperature | round }}°</span>
+                      <span class="label">High</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
       </div>
+      {% endif %}
+    </div>
+    <div class="title_bar">
+      <img class="image image--adaptive" alt="" src="https://trmnl.com/images/plugins/weather--render.svg">
+      <h1 class="title">Weather</h1>
+      <span class="instance">{{ current.name }}</span>
+    </div>
+  </section>
 
-      <div class="od-weather__details">
-        {% if config.show_feels_like %}
-        <div class="od-weather__detail">
-          <img class="image image--adaptive" alt="Temperature" src="https://trmnl.com/images/plugins/weather/wi-thermometer.svg">
-          <div>
-            <div class="od-weather__detail-value">{{ data.current.feels_like }}°</div>
-            <div class="od-weather__detail-label">Feels Like</div>
+  <section class="od-weather__composition od-weather__composition--wide" data-weather-composition="wide">
+    <div class="layout layout--col gap--space-between">
+      <div class="grid grid--cols-4">
+        <div class="row row--center lg:col">
+          <img class="image--adaptive w--[22cqw] h--auto lg:w--[24cqw] lg:h--[24cqw]" alt="{{ current.condition_label }}" src="{{ current.icon }}">
+        </div>
+        <div class="col">
+          <div class="item grow">
+            <div class="meta"></div>
+            <div class="content">
+              <span class="value value--xxxlarge lg:value--giga" data-fit-value="true">{{ current.temperature }}°</span>
+              <span class="label">Temperature</span>
+              <span class="label">{{ current.updated_at }}</span>
+            </div>
           </div>
         </div>
-        {% endif %}
-
-        {% if config.show_humidity %}
-        <div class="od-weather__detail">
-          <img class="image image--adaptive" alt="Humidity" src="https://trmnl.com/images/plugins/weather/wi-raindrops.svg">
-          <div>
-            <div class="od-weather__detail-value">{{ data.current.humidity }}%</div>
-            <div class="od-weather__detail-label">Humidity</div>
+        <div class="col gap--medium">
+          <div class="item grow">
+            <div class="meta"></div>
+            <div class="content">
+              <span class="value value--xsmall lg:value--base">{{ current.condition_label }}</span>
+              <span class="label">Right Now</span>
+            </div>
           </div>
+          {% if config.showForecast and today %}
+          <div class="item grow">
+            <div class="meta"></div>
+            <div class="content">
+              <span class="value value--xsmall lg:value--small">{% if today.templow != nil %}{{ today.templow }}° – {% endif %}{{ today.temperature }}°</span>
+              <span class="label">{% if today.templow != nil %}L/H{% else %}High{% endif %}</span>
+            </div>
+          </div>
+          <div class="item grow">
+            <div class="meta"></div>
+            <div class="content">
+              <span class="value value--xsmall lg:value--small">{% if today.uv_index != nil %}{{ today.uv_label }} ({{ today.uv_index }}){% elsif today.precipitation_probability != nil %}{{ today.precipitation_probability }}%{% else %}—{% endif %}</span>
+              <span class="label">{% if today.uv_index != nil %}UV{% elsif today.precipitation_probability != nil %}Precipitation{% else %}Details{% endif %}</span>
+            </div>
+          </div>
+          {% endif %}
         </div>
-        {% endif %}
+        <div class="col gap--medium">
+          {% if config.showForecast and tomorrow %}
+          <div class="item grow">
+            <div class="meta"></div>
+            <div class="content">
+              <span class="value value--xsmall lg:value--base">{{ tomorrow.condition_label }}</span>
+              <span class="label">Tomorrow</span>
+            </div>
+          </div>
+          <div class="item grow">
+            <div class="meta"></div>
+            <div class="content">
+              <span class="value value--xsmall lg:value--small">{% if tomorrow.templow != nil %}{{ tomorrow.templow }}° – {% endif %}{{ tomorrow.temperature }}°</span>
+              <span class="label">{% if tomorrow.templow != nil %}L/H{% else %}High{% endif %}</span>
+            </div>
+          </div>
+          <div class="item grow">
+            <div class="meta"></div>
+            <div class="content">
+              <span class="value value--xsmall lg:value--small">{% if tomorrow.uv_index != nil %}{{ tomorrow.uv_label }} ({{ tomorrow.uv_index }}){% elsif tomorrow.precipitation_probability != nil %}{{ tomorrow.precipitation_probability }}%{% else %}—{% endif %}</span>
+              <span class="label">{% if tomorrow.uv_index != nil %}UV{% elsif tomorrow.precipitation_probability != nil %}Precipitation{% else %}Details{% endif %}</span>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="title_bar">
+      <img class="image image--adaptive" alt="" src="https://trmnl.com/images/plugins/weather--render.svg">
+      <h1 class="title">{{ current.updated_at }}</h1>
+      <span class="instance">{{ current.name }}</span>
+    </div>
+  </section>
 
-        <div class="od-weather__detail">
-          <img class="image image--adaptive" alt="{{ data.current.condition }}" src="{{ data.current.icon }}">
-          <div>
-            <div class="od-weather__detail-value od-weather__detail-value--condition">{{ data.current.condition }}</div>
-            <div class="od-weather__detail-label">Right Now</div>
+  <section class="od-weather__composition od-weather__composition--tall" data-weather-composition="tall">
+    <div class="layout layout--col gap--space-between">
+      <div class="grid grid--cols-2 portrait:grid--cols-1">
+        <div class="row row--center">
+          <img class="image--adaptive w--[46cqw] h--[46cqw] portrait:w--auto portrait:h--[22cqh] lg:w--[46cqw] lg:h--[46cqw] lg:portrait:w--auto lg:portrait:h--[32cqh]" alt="{{ current.condition_label }}" src="{{ current.icon }}">
+        </div>
+        <div class="col">
+          <div class="item grow">
+            <div class="meta"></div>
+            <div class="content">
+              <span class="value value--xxlarge lg:value--giga lg:portrait:value--mega" data-fit-value="true">{{ current.temperature }}°</span>
+              <span class="label">Temperature</span>
+              <span class="label">{{ current.updated_at }}</span>
+            </div>
           </div>
         </div>
       </div>
-    </section>
-
-    {% if config.show_forecast %}
-    <section class="od-weather__forecast">
-      {% for day in data.forecast limit: 2 %}
-      <article class="od-weather__forecast-day">
-        <div class="od-weather__forecast-condition">
-          <img class="image image--adaptive" alt="{{ day.condition }}" src="{{ day.icon }}">
-          <div>
-            <div class="od-weather__forecast-title">{{ day.condition }}</div>
-            <div class="od-weather__forecast-date">{{ day.date }}</div>
+      {% if config.showForecast and forecast.size > 0 %}
+      <div class="divider"></div>
+      <div class="grid grid--cols-2 portrait:grid--cols-1 portrait:gap">
+        {% for day in forecast limit: 2 %}
+        {% if forloop.index == 2 %}<div class="divider landscape:hidden"></div>{% endif %}
+        <div class="col gap--medium">
+          <div class="item">
+            <div class="meta"></div>
+            <div class="content">
+              <span class="value value--small lg:value--base">{% if forloop.first %}{{ current.condition_label }}{% else %}{{ day.condition_label }}{% endif %}</span>
+              <span class="label">{% if forloop.first %}Right Now{% else %}Tomorrow{% endif %}</span>
+            </div>
+          </div>
+          <div class="item">
+            <div class="meta"></div>
+            <div class="content">
+              <span class="value value--xsmall lg:value--small lg:portrait:value--small">{% if day.templow != nil %}{{ day.templow }}° – {% endif %}{{ day.temperature }}°</span>
+              <span class="label">{% if day.templow != nil %}L/H{% else %}High{% endif %}</span>
+            </div>
+          </div>
+          <div class="item">
+            <div class="meta"></div>
+            <div class="content">
+              <span class="value value--xsmall lg:value--small lg:portrait:value--small">{% if day.uv_index != nil %}{{ day.uv_label }} ({{ day.uv_index }}){% elsif day.precipitation_probability != nil %}{{ day.precipitation_probability }}%{% else %}—{% endif %}</span>
+              <span class="label">{% if day.uv_index != nil %}UV{% elsif day.precipitation_probability != nil %}Precipitation{% else %}Details{% endif %}</span>
+            </div>
           </div>
         </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+    <div class="title_bar">
+      <img class="image image--adaptive" alt="" src="https://trmnl.com/images/plugins/weather--render.svg">
+      <h1 class="title">{{ current.updated_at }}</h1>
+      <span class="instance">{{ current.name }}</span>
+    </div>
+  </section>
 
-        <div class="od-weather__forecast-uv">
-          <img class="image image--adaptive" alt="UV Index" src="https://trmnl.com/images/plugins/weather/wi-hot.svg">
-          <div>
-            <div class="od-weather__forecast-title">{{ day.uv_label }} ({{ day.uv }})</div>
-            <div class="od-weather__forecast-date">UV</div>
+  <section class="od-weather__composition od-weather__composition--compact" data-weather-composition="compact">
+    <div class="layout">
+      <div class="grid grid--cols-2 portrait:grid--cols-1 gap--none lg:portrait:gap">
+        <div class="col">
+          <div class="row row--center">
+            <img class="image--adaptive w--[46cqw] h--auto portrait:w--auto portrait:h--[50cqh] lg:w--[46cqw] lg:h--[46cqw] lg:portrait:w--auto lg:portrait:h--[46cqh]" alt="{{ current.condition_label }}" src="{{ current.icon }}">
+          </div>
+          <div class="hidden lg:flex lg:portrait:hidden h--full">
+            <div class="item grow">
+              <div class="meta"></div>
+              <div class="content">
+                <span class="value value--xsmall lg:value--base">{{ current.condition_label }}</span>
+                <span class="label hidden lg:visible">Right Now</span>
+              </div>
+            </div>
           </div>
         </div>
-
-        <div class="od-weather__forecast-temp">
-          <img class="image image--adaptive" alt="Temperature" src="https://trmnl.com/images/plugins/weather/wi-thermometer.svg">
-          <div class="od-weather__minmax">
-            <div><strong>{{ day.low }}°</strong><span>Low</span></div>
-            <div><strong>{{ day.high }}°</strong><span>High</span></div>
+        <div class="col gap lg:portrait:grid lg:portrait:grid--cols-2">
+          <div class="item grow">
+            <div class="meta"></div>
+            <div class="content">
+              <span class="value value--large lg:value--xxxlarge" data-fit-value="true">{{ current.temperature }}°</span>
+              <span class="label hidden lg:visible">Temperature</span>
+            </div>
           </div>
+          <div class="visible lg:hidden lg:portrait:flex h--full">
+            <div class="item grow">
+              <div class="meta"></div>
+              <div class="content">
+                <span class="value value--xsmall lg:portrait:value--base">{{ current.condition_label }}</span>
+                <span class="label hidden lg:visible">Right Now</span>
+              </div>
+            </div>
+          </div>
+          {% if config.showForecast and today %}
+          <div class="item">
+            <div class="meta"></div>
+            <div class="content">
+              <span class="value value--xxsmall lg:value--small">{% if today.templow != nil %}{{ today.templow }}° – {% endif %}{{ today.temperature }}°</span>
+              <span class="label hidden lg:visible">{% if today.templow != nil %}L/H{% else %}High{% endif %}</span>
+            </div>
+          </div>
+          <div class="item">
+            <div class="meta"></div>
+            <div class="content">
+              <span class="value value--xxsmall lg:value--small">{% if today.uv_index != nil %}{{ today.uv_label }} ({{ today.uv_index }}){% elsif today.precipitation_probability != nil %}{{ today.precipitation_probability }}%{% else %}—{% endif %}</span>
+              <span class="label hidden lg:visible">{% if today.uv_index != nil %}UV{% elsif today.precipitation_probability != nil %}Precipitation{% else %}Details{% endif %}</span>
+            </div>
+          </div>
+          {% endif %}
         </div>
-      </article>
-      {% endfor %}
-    </section>
-    {% endif %}
-  </div>
+      </div>
+    </div>
+    <div class="title_bar">
+      <img class="image image--adaptive" alt="" src="https://trmnl.com/images/plugins/weather--render.svg">
+      <h1 class="title">{{ current.updated_at }}</h1>
+      <span class="instance">{{ current.name }}</span>
+    </div>
+  </section>
 
-  <div class="title_bar">
-    <img class="image image--adaptive" alt="" src="https://trmnl.com/images/plugins/weather--render.svg">
-    <h1 class="title">Weather</h1>
-    <span class="instance">{{ data.location }}</span>
-  </div>
+  <section class="od-weather__composition od-weather__composition--minimal" data-weather-composition="minimal">
+    <div class="layout">
+      <div class="od-weather__minimal-content">
+        <img class="image--adaptive" alt="{{ current.condition_label }}" src="{{ current.icon }}">
+        <span class="value">{{ current.temperature }}°</span>
+      </div>
+    </div>
+    <div class="title_bar">
+      <img class="image image--adaptive" alt="" src="https://trmnl.com/images/plugins/weather--render.svg">
+      <h1 class="title">{{ current.updated_at }}</h1>
+      <span class="instance">{{ current.name }}</span>
+    </div>
+  </section>
 </div>
 
 <style>
@@ -88,325 +331,102 @@
     min-width: 0;
     min-height: 0;
     container-type: size;
-    display: grid;
+    container-name: weather;
+    overflow: hidden;
+  }
+
+  .od-weather__composition {
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+    display: none;
     grid-template-rows: minmax(0, 1fr) auto;
     overflow: hidden;
   }
 
-  .od-weather__body {
+  .od-weather__composition > .layout {
+    width: 100%;
+    height: auto !important;
     min-width: 0;
     min-height: 0;
-    display: grid;
-    grid-template-rows: minmax(0, 1.05fr) auto;
-    gap: 12px;
-    padding-bottom: 4px;
+    padding: var(--gap);
+    overflow: hidden;
   }
 
-  .od-weather__current {
-    min-height: 0;
-    display: grid;
-    grid-template-columns: 1fr 1.15fr 1fr;
-    align-items: center;
-    gap: 18px;
+  .od-weather__composition:not(.od-weather__composition--expansive) > .title_bar {
+    height: var(--title-bar-small-height);
   }
 
-  .od-weather__hero-icon,
-  .od-weather__temperature,
-  .od-weather__details {
+  .od-weather__composition:not(.od-weather__composition--expansive) > .title_bar img {
+    height: var(--title-bar-small-image-height);
+  }
+
+  .od-weather__composition--compact {
+    display: grid;
+  }
+
+  .od-weather__minimal-content {
+    width: 100%;
+    height: 100%;
     min-width: 0;
     min-height: 0;
-  }
-
-  .od-weather__hero-icon {
-    height: 100%;
-    display: grid;
-    place-items: center;
-    border-right: 2px solid var(--gray-2, #ddd);
-  }
-
-  .od-weather__hero-icon img {
-    width: min(72%, 190px);
-    height: auto;
-    max-height: 82%;
-  }
-
-  .od-weather__temperature {
-    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    border-right: 2px solid var(--gray-2, #ddd);
-  }
-
-  .od-weather__temperature-value {
-    font-size: clamp(56px, 13cqw, 138px);
-    line-height: .88;
-    letter-spacing: -.065em;
-    white-space: nowrap;
-  }
-
-  .od-weather__temperature-label,
-  .od-weather__detail-label,
-  .od-weather__forecast-date,
-  .od-weather__minmax span {
-    font-size: clamp(9px, 1.5cqw, 15px);
-    opacity: .8;
-  }
-
-  .od-weather__details {
-    display: grid;
-    align-content: center;
-    gap: 10px;
-  }
-
-  .od-weather__detail {
-    display: grid;
-    grid-template-columns: 34px minmax(0, 1fr);
     align-items: center;
-    gap: 8px;
+    justify-content: center;
+    gap: 4px;
   }
 
-  .od-weather__detail img,
-  .od-weather__forecast-condition img,
-  .od-weather__forecast-uv img,
-  .od-weather__forecast-temp img {
-    width: 30px;
-    height: 30px;
+  .od-weather__minimal-content img {
+    width: min(78cqw, 145px);
+    height: min(60cqh, 120px);
     object-fit: contain;
   }
 
-  .od-weather__detail-value,
-  .od-weather__forecast-title,
-  .od-weather__minmax strong {
-    font-size: clamp(16px, 3.3cqw, 30px);
+  .od-weather__minimal-content .value {
+    font-size: clamp(38px, 25cqw, 56px);
     line-height: 1;
+    white-space: nowrap;
   }
 
-  .od-weather__detail-value--condition {
-    font-size: clamp(14px, 2.4cqw, 24px);
+  @container weather (min-width: 480px) and (max-height: 339px) {
+    .od-weather__composition { display: none; }
+    .od-weather__composition--wide { display: grid; }
   }
 
-  .od-weather__forecast {
-    border-top: 1px solid var(--gray-2, #ddd);
-    padding-top: 10px;
-    display: grid;
-    gap: 8px;
+  @container weather (min-width: 300px) and (max-width: 619px) and (min-height: 340px) {
+    .od-weather__composition { display: none; }
+    .od-weather__composition--tall { display: grid; }
   }
 
-  .od-weather__forecast-day {
-    display: grid;
-    grid-template-columns: 1.25fr 1fr .9fr;
-    align-items: center;
-    gap: 12px;
+  @container weather (min-width: 620px) and (min-height: 340px) {
+    .od-weather__composition { display: none; }
+    .od-weather__composition--expansive { display: grid; }
   }
 
-  .od-weather__forecast-condition,
-  .od-weather__forecast-uv,
-  .od-weather__forecast-temp {
-    min-width: 0;
-    display: grid;
-    grid-template-columns: 30px minmax(0, 1fr);
-    align-items: center;
-    gap: 7px;
-    border-right: 2px solid var(--gray-2, #ddd);
+  @container weather (min-width: 400px) and (min-height: 620px) {
+    .od-weather__composition { display: none; }
+    .od-weather__composition--expansive { display: grid; }
   }
 
-  .od-weather__forecast-temp {
-    border-right: 0;
+  @container weather (max-width: 240px) {
+    .od-weather .title_bar .instance { display: none; }
   }
 
-  .od-weather__minmax {
-    display: flex;
-    gap: 14px;
+  @container weather (max-width: 240px) and (max-height: 299px) {
+    .od-weather__composition { display: none; }
+    .od-weather__composition--minimal { display: grid; }
   }
 
-  .od-weather__minmax > div {
-    display: grid;
-  }
-
-  @container (max-height: 290px) and (min-width: 520px) {
-    .od-weather__body {
-      grid-template-columns: 1.25fr 1fr;
-      grid-template-rows: minmax(0, 1fr);
-      gap: 14px;
+  @container weather (max-width: 240px) and (min-height: 300px) {
+    .od-weather__composition--compact .grid {
+      grid-template-columns: minmax(0, 1fr);
     }
 
-    .od-weather__current {
-      grid-template-columns: .9fr 1.1fr;
-      gap: 12px;
-    }
-
-    .od-weather__details {
-      display: none;
-    }
-
-    .od-weather__forecast {
-      border-top: 0;
-      border-left: 1px solid var(--gray-2, #ddd);
-      padding: 0 0 0 12px;
-      align-content: center;
-    }
-
-    .od-weather__forecast-day {
-      grid-template-columns: 1fr;
-      gap: 8px;
-    }
-
-    .od-weather__forecast-uv,
-    .od-weather__forecast-temp {
-      display: none;
-    }
-
-    .od-weather__forecast-condition {
-      border-right: 0;
-      grid-template-columns: 28px 1fr;
-    }
-  }
-
-  @container (max-width: 520px) and (min-height: 300px) {
-    .od-weather__body {
-      grid-template-rows: auto minmax(0, 1fr);
-      gap: 10px;
-    }
-
-    .od-weather__current {
-      grid-template-columns: .8fr 1.2fr;
-      gap: 10px;
-    }
-
-    .od-weather__details {
-      display: none;
-    }
-
-    .od-weather__hero-icon img {
-      width: 72%;
-    }
-
-    .od-weather__forecast-day {
-      grid-template-columns: 1fr;
-      gap: 5px;
-      align-content: center;
-    }
-
-    .od-weather__forecast {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      border-top: 1px solid var(--gray-2, #ddd);
-      padding-top: 8px;
-    }
-
-    .od-weather__forecast-condition,
-    .od-weather__forecast-uv {
-      border-right: 0;
-      grid-template-columns: 24px minmax(0, 1fr);
-    }
-
-    .od-weather__forecast-temp {
-      display: none;
-    }
-
-    .od-weather__forecast-condition img,
-    .od-weather__forecast-uv img {
-      width: 23px;
-      height: 23px;
-    }
-  }
-
-  @container (max-width: 300px) {
-    .od-weather__body {
-      grid-template-rows: auto minmax(0, 1fr);
-      gap: 7px;
-    }
-
-    .od-weather__current {
-      grid-template-columns: .72fr 1.28fr;
-      gap: 7px;
-    }
-
-    .od-weather__hero-icon {
-      border-right-width: 1px;
-    }
-
-    .od-weather__temperature {
-      border-right: 0;
-    }
-
-    .od-weather__temperature-value {
-      font-size: clamp(40px, 28cqw, 76px);
-    }
-
-    .od-weather__temperature-label {
-      font-size: 8px;
-    }
-
-    .od-weather__details {
-      display: none;
-    }
-
-    .od-weather__forecast {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 5px;
-      padding-top: 6px;
-    }
-
-    .od-weather__forecast-day {
-      display: block;
-      min-width: 0;
-    }
-
-    .od-weather__forecast-condition {
-      display: grid;
-      grid-template-columns: 20px minmax(0, 1fr);
-      gap: 4px;
-      border-right: 0;
-    }
-
-    .od-weather__forecast-condition img {
-      width: 19px;
-      height: 19px;
-    }
-
-    .od-weather__forecast-title {
-      font-size: 10px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .od-weather__forecast-date {
-      font-size: 7px;
-    }
-
-    .od-weather__forecast-uv,
-    .od-weather__forecast-temp {
-      display: none;
-    }
-
-    .title_bar .instance {
-      display: none;
-    }
-  }
-
-  @container (max-width: 240px) and (max-height: 280px) {
-    .od-weather__body {
-      display: block;
-    }
-
-    .od-weather__current {
-      width: 100%;
-      height: 100%;
-      grid-template-columns: .7fr 1.3fr;
-    }
-
-    .od-weather__forecast {
-      display: none;
-    }
-
-    .od-weather__hero-icon img {
-      width: 78%;
-    }
-
-    .od-weather__temperature-value {
-      font-size: clamp(38px, 29cqw, 62px);
+    .od-weather__composition--compact .row img {
+      width: auto;
+      height: min(38cqh, 160px);
     }
   }
 </style>

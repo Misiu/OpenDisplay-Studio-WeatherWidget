@@ -1,0 +1,33 @@
+data:
+  weather:
+    entity_id: weather.home
+    name: Home
+    condition: cloudy
+    condition_label: Pochmurno
+    icon: https://trmnl.com/images/plugins/weather/wi-cloudy.svg
+    temperature: 16
+    temperature_unit: "°C"
+    apparent_temperature: null
+    humidity: null
+    updated_at: 09:30
+    forecast:
+      - datetime: "2026-08-26T12:00:00+02:00"
+        date_label: Today
+        condition: cloudy
+        condition_label: Cloudy
+        icon: https://trmnl.com/images/plugins/weather/wi-cloudy.svg
+        templow: null
+        temperature: 19
+        uv_index: null
+        uv_label: null
+        precipitation_probability: 20
+      - datetime: "2026-08-27T12:00:00+02:00"
+        date_label: Tomorrow
+        condition: rainy
+        condition_label: Rain
+        icon: https://trmnl.com/images/plugins/weather/wi-rain.svg
+        templow: null
+        temperature: 17
+        uv_index: null
+        uv_label: null
+        precipitation_probability: 70

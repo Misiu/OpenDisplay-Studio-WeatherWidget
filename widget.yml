@@ -1,25 +1,41 @@
 id: weather
 name: Weather
-version: 1
+version: 2
 description: Responsive weather widget for OpenDisplay Studio, inspired by the TRMNL Weather layout
 framework: 3.2.0
 template: widget.liquid
 
 defaults:
-  show_humidity: true
-  show_feels_like: true
-  show_forecast: true
+  weather: ""
+  showHumidity: true
+  showFeelsLike: true
+  showForecast: true
 
 fields:
-  - key: show_humidity
+  - key: weather
+    label: Weather entity
+    required: true
+    selector:
+      entity:
+        filter:
+          domain: weather
+  - key: showHumidity
     label: Show humidity
-    type: boolean
-  - key: show_feels_like
+    selector:
+      boolean: {}
+  - key: showFeelsLike
     label: Show feels like
-    type: boolean
-  - key: show_forecast
+    selector:
+      boolean: {}
+  - key: showForecast
     label: Show forecast
-    type: boolean
+    selector:
+      boolean: {}
 
 dataRequirements:
-  - type: weather
+  - key: weather
+    provider: weather_forecast
+    configKey: weather
+    cardinality: one
+    optional: false
+    forecastType: daily

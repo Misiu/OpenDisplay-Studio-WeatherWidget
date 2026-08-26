@@ -1,24 +1,33 @@
 data:
-  location: Phoenix Downtown
-  current:
-    temperature: 43
-    feels_like: 47
-    humidity: 18
-    condition: Very Hot and Sunny
-    observed_at: 14:40
+  weather:
+    entity_id: weather.home
+    name: Phoenix Downtown
+    condition: sunny
+    condition_label: Sunny
     icon: https://trmnl.com/images/plugins/weather/wi-hot.svg
-  forecast:
-    - date: Today
-      condition: Scorching Sun
-      icon: https://trmnl.com/images/plugins/weather/wi-day-sunny.svg
-      low: 31
-      high: 45
-      uv: 11
-      uv_label: Extreme
-    - date: Tomorrow
-      condition: Mostly Sunny
-      icon: https://trmnl.com/images/plugins/weather/wi-day-sunny-overcast.svg
-      low: 30
-      high: 44
-      uv: 10
-      uv_label: Very High
+    temperature: 43
+    temperature_unit: "°C"
+    apparent_temperature: 47
+    humidity: 18
+    updated_at: 14:40
+    forecast:
+      - datetime: "2026-08-26T12:00:00-07:00"
+        date_label: Today
+        condition: sunny
+        condition_label: Sunny
+        icon: https://trmnl.com/images/plugins/weather/wi-day-sunny.svg
+        templow: 31
+        temperature: 45
+        uv_index: 11
+        uv_label: Extreme
+        precipitation_probability: 0
+      - datetime: "2026-08-27T12:00:00-07:00"
+        date_label: Tomorrow
+        condition: partlycloudy
+        condition_label: Mostly sunny
+        icon: https://trmnl.com/images/plugins/weather/wi-day-sunny-overcast.svg
+        templow: 30
+        temperature: 44
+        uv_index: 10
+        uv_label: Very high
+        precipitation_probability: 0
