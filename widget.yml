@@ -1,6 +1,6 @@
 id: weather
 name: Weather
-version: "0.5.0"
+version: "0.5.1"
 description: Current conditions and a daily Home Assistant forecast.
 icon: mdi:weather-partly-cloudy
 framework: 3.2.0
