@@ -54,9 +54,7 @@ def _read_translation_file(path: Path) -> dict[str, str]:
     if not isinstance(value, dict):
         return {}
     return {
-        str(key): str(label)
-        for key, label in value.items()
-        if isinstance(label, str)
+        str(key): str(label) for key, label in value.items() if isinstance(label, str)
     }
 
 
@@ -99,9 +97,7 @@ class WeatherLocalizer:
         labels["weather"] = weather_title.get(
             "component.weather.title", labels["weather"]
         )
-        attribute_prefix = (
-            "component.weather.entity_component._.state_attributes."
-        )
+        attribute_prefix = "component.weather.entity_component._.state_attributes."
         for key in ("temperature", "apparent_temperature", "humidity"):
             labels[key] = weather_entity.get(
                 f"{attribute_prefix}{key}.name", labels[key]
@@ -180,7 +176,7 @@ def _forecast_date_label(
         return format_date(
             local_date, format="EEE", locale=localizer.language.replace("-", "_")
         )
-    except (UnknownLocaleError, ValueError):
+    except UnknownLocaleError, ValueError:
         return local_date.strftime("%a")
 
 
@@ -310,9 +306,7 @@ class WeatherDataProvider:
         weather = cast("WeatherResult", resolved)
         values = [
             {
-                **weather.values.get(
-                    source, _placeholder(source, weather.localizer)
-                ),
+                **weather.values.get(source, _placeholder(source, weather.localizer)),
                 "labels": weather.localizer.labels,
             }
             for source in sources
