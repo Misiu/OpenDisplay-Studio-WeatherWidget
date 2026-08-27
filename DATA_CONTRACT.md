@@ -8,9 +8,11 @@ The widget requests one Home Assistant `weather` entity through the
 
 Configuration fields contain native Home Assistant selector definitions. The
 integration can pass their `selector` objects directly to `ha-form`, using the
-same UI vocabulary as blueprints. Widget packages never contain executable
-Python. Provider names resolve only to implementations registered and reviewed
-inside OpenDisplay Studio Integration.
+same UI vocabulary as blueprints. This package owns `provider.py`; the
+integration only discovers the provider protocol and scopes the exported
+provider to this widget. Installing a provider-bearing package means trusting
+its Python code. A future public Store must verify package provenance before
+installation.
 
 Fixtures model the normalized provider result, not the complete Home Assistant
 state object. The Liquid context has this shape:
@@ -28,6 +30,11 @@ data:
     apparent_temperature: 17 # null when unsupported
     humidity: 72              # null when unsupported
     updated_at: 09:30
+    labels:
+      weather: Weather
+      temperature: Temperature
+      right_now: Right now
+      # The complete label set is defined by translations/en.json.
     forecast:
       - datetime: "2026-08-26T12:00:00+02:00"
         date_label: Today
@@ -52,8 +59,11 @@ precipitation probability are optional. When UV is unavailable, the widget uses
 precipitation probability as the secondary forecast detail.
 
 The normalized fields `name`, `condition_label`, `icon`, `updated_at`,
-`date_label`, and `uv_label` are presentation values supplied by the integration.
-All other weather values preserve Home Assistant's public field names.
+`date_label`, and `uv_label` are presentation values supplied by this package's
+provider. Weather conditions and attribute labels reuse Home Assistant's
+translations. Widget presentation terms come from `translations/<language>.json`
+with English fallback. All other values preserve Home Assistant's public field
+names.
 
 References:
 

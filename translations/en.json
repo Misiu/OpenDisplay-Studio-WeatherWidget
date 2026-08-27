@@ -1,0 +1,22 @@
+{
+  "weather": "Weather",
+  "temperature": "Temperature",
+  "apparent_temperature": "Apparent temperature",
+  "humidity": "Humidity",
+  "right_now": "Right now",
+  "low": "Low",
+  "high": "High",
+  "low_high": "L/H",
+  "today": "Today",
+  "tomorrow": "Tomorrow",
+  "precipitation": "Precipitation",
+  "details": "Details",
+  "uv": "UV",
+  "uv_low": "Low",
+  "uv_moderate": "Moderate",
+  "uv_high": "High",
+  "uv_very_high": "Very high",
+  "uv_extreme": "Extreme",
+  "unavailable": "Unavailable",
+  "choose_weather_entity": "Choose a weather entity"
+}

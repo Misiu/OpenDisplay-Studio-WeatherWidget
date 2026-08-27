@@ -1,0 +1,19 @@
+{
+  "weather": "Pogoda",
+  "right_now": "Teraz",
+  "low": "Min.",
+  "high": "Maks.",
+  "low_high": "Min./maks.",
+  "today": "Dzisiaj",
+  "tomorrow": "Jutro",
+  "precipitation": "Opady",
+  "details": "Szczegóły",
+  "uv": "UV",
+  "uv_low": "Niskie",
+  "uv_moderate": "Umiarkowane",
+  "uv_high": "Wysokie",
+  "uv_very_high": "Bardzo wysokie",
+  "uv_extreme": "Ekstremalne",
+  "unavailable": "Niedostępne",
+  "choose_weather_entity": "Wybierz encję pogody"
+}

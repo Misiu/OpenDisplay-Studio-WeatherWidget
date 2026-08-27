@@ -1,9 +1,11 @@
 id: weather
 name: Weather
-version: 4
-description: Responsive weather widget for OpenDisplay Studio, inspired by the TRMNL Weather layout
+version: "0.5.0"
+description: Current conditions and a daily Home Assistant forecast.
+icon: mdi:weather-partly-cloudy
 framework: 3.2.0
 template: widget.liquid
+provider: provider.py
 
 defaults:
   weather: ""

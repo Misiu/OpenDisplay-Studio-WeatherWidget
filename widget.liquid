@@ -26,7 +26,7 @@
             <div class="meta"></div>
             <div class="content">
               <span class="value value--xxxlarge lg:value--giga" data-fit-value="true">{{ current.temperature }}°</span>
-              <span class="label">Temperature ({{ current.updated_at }})</span>
+              <span class="label">{{ current.labels.temperature }} ({{ current.updated_at }})</span>
             </div>
           </div>
         </div>
@@ -35,11 +35,11 @@
           <div class="item">
             <div class="meta"></div>
             <div class="icon">
-              <img class="image--adaptive w--[6cqw] h--[6cqw] portrait:w--[10cqw] portrait:h--[10cqw]" alt="Temperature" src="https://trmnl.com/images/plugins/weather/wi-thermometer.svg">
+              <img class="image--adaptive w--[6cqw] h--[6cqw] portrait:w--[10cqw] portrait:h--[10cqw]" alt="{{ current.labels.temperature }}" src="https://trmnl.com/images/plugins/weather/wi-thermometer.svg">
             </div>
             <div class="content">
               <span class="value value--xsmall lg:value--large">{{ current.apparent_temperature }}°</span>
-              <span class="label">Feels Like</span>
+              <span class="label">{{ current.labels.apparent_temperature }}</span>
             </div>
           </div>
           {% endif %}
@@ -47,11 +47,11 @@
           <div class="item">
             <div class="meta"></div>
             <div class="icon">
-              <img class="image--adaptive w--[6cqw] h--[6cqw] portrait:w--[10cqw] portrait:h--[10cqw]" alt="Humidity" src="https://trmnl.com/images/plugins/weather/wi-raindrops.svg">
+              <img class="image--adaptive w--[6cqw] h--[6cqw] portrait:w--[10cqw] portrait:h--[10cqw]" alt="{{ current.labels.humidity }}" src="https://trmnl.com/images/plugins/weather/wi-raindrops.svg">
             </div>
             <div class="content">
               <span class="value value--xsmall lg:value--large">{{ current.humidity }}%</span>
-              <span class="label">Humidity</span>
+              <span class="label">{{ current.labels.humidity }}</span>
             </div>
           </div>
           {% endif %}
@@ -62,7 +62,7 @@
             </div>
             <div class="content">
               <span class="value value--xsmall lg:value--base">{{ current.condition_label }}</span>
-              <span class="label">Right Now</span>
+              <span class="label">{{ current.labels.right_now }}</span>
             </div>
           </div>
         </div>
@@ -88,11 +88,11 @@
             <div class="item col--span-3 grow">
               <div class="meta"></div>
               <div class="icon portrait:hidden">
-                <img class="image--adaptive w--[6cqw] h--[6cqw] portrait:w--[10cqw] portrait:h--[10cqw]" alt="{% if day.uv_index != nil %}UV index{% else %}Precipitation probability{% endif %}" src="{% if day.uv_index != nil %}https://trmnl.com/images/plugins/weather/wi-hot.svg{% else %}https://trmnl.com/images/plugins/weather/wi-raindrops.svg{% endif %}">
+                <img class="image--adaptive w--[6cqw] h--[6cqw] portrait:w--[10cqw] portrait:h--[10cqw]" alt="{% if day.uv_index != nil %}{{ current.labels.uv }}{% else %}{{ current.labels.precipitation }}{% endif %}" src="{% if day.uv_index != nil %}https://trmnl.com/images/plugins/weather/wi-hot.svg{% else %}https://trmnl.com/images/plugins/weather/wi-raindrops.svg{% endif %}">
               </div>
               <div class="content">
                 <span class="value value--xsmall lg:value--base">{% if day.uv_index != nil %}{{ day.uv_label }} ({{ day.uv_index }}){% else %}{{ day.precipitation_probability }}%{% endif %}</span>
-                <span class="label">{% if day.uv_index != nil %}UV{% else %}Precipitation{% endif %}</span>
+                <span class="label">{% if day.uv_index != nil %}{{ current.labels.uv }}{% else %}{{ current.labels.precipitation }}{% endif %}</span>
               </div>
             </div>
             {% endif %}
@@ -100,17 +100,17 @@
               <div class="item">
                 <div class="meta"></div>
                 <div class="icon portrait:hidden">
-                  <img class="image--adaptive w--[6cqw] h--[6cqw] portrait:w--[10cqw] portrait:h--[10cqw]" alt="Temperature" src="https://trmnl.com/images/plugins/weather/wi-thermometer.svg">
+                  <img class="image--adaptive w--[6cqw] h--[6cqw] portrait:w--[10cqw] portrait:h--[10cqw]" alt="{{ current.labels.temperature }}" src="https://trmnl.com/images/plugins/weather/wi-thermometer.svg">
                 </div>
                 <div class="content">
                   <div class="flex flex--row gap--xlarge portrait:gap">
                     <div class="content">
                       <span class="value value--xsmall lg:value--base">{% if day.templow != nil %}{{ day.templow | round }}°{% else %}—{% endif %}</span>
-                      <span class="label">Low</span>
+                      <span class="label">{{ current.labels.low }}</span>
                     </div>
                     <div class="content">
                       <span class="value value--xsmall lg:value--base">{{ day.temperature | round }}°</span>
-                      <span class="label">High</span>
+                      <span class="label">{{ current.labels.high }}</span>
                     </div>
                   </div>
                 </div>
@@ -124,7 +124,7 @@
     </div>
     <div class="title_bar">
       <img class="image image--adaptive" alt="" src="https://trmnl.com/images/plugins/weather--render.svg">
-      <h1 class="title">Weather</h1>
+      <h1 class="title">{{ current.labels.weather }}</h1>
       <span class="instance">{{ current.name }}</span>
     </div>
   </section>
@@ -140,7 +140,7 @@
             <div class="meta"></div>
             <div class="content">
               <span class="value value--xxxlarge lg:value--giga" data-fit-value="true">{{ current.temperature }}°</span>
-              <span class="label">Temperature</span>
+              <span class="label">{{ current.labels.temperature }}</span>
               <span class="label">{{ current.updated_at }}</span>
             </div>
           </div>
@@ -150,7 +150,7 @@
             <div class="meta"></div>
             <div class="content">
               <span class="value value--xsmall lg:value--base">{{ current.condition_label }}</span>
-              <span class="label">Right Now</span>
+              <span class="label">{{ current.labels.right_now }}</span>
             </div>
           </div>
           {% if config.showForecast and today %}
@@ -158,14 +158,14 @@
             <div class="meta"></div>
             <div class="content">
               <span class="value value--xsmall lg:value--small">{% if today.templow != nil %}{{ today.templow }}° – {% endif %}{{ today.temperature }}°</span>
-              <span class="label">{% if today.templow != nil %}L/H{% else %}High{% endif %}</span>
+              <span class="label">{% if today.templow != nil %}{{ current.labels.low_high }}{% else %}{{ current.labels.high }}{% endif %}</span>
             </div>
           </div>
           <div class="item grow">
             <div class="meta"></div>
             <div class="content">
               <span class="value value--xsmall lg:value--small">{% if today.uv_index != nil %}{{ today.uv_label }} ({{ today.uv_index }}){% elsif today.precipitation_probability != nil %}{{ today.precipitation_probability }}%{% else %}—{% endif %}</span>
-              <span class="label">{% if today.uv_index != nil %}UV{% elsif today.precipitation_probability != nil %}Precipitation{% else %}Details{% endif %}</span>
+              <span class="label">{% if today.uv_index != nil %}{{ current.labels.uv }}{% elsif today.precipitation_probability != nil %}{{ current.labels.precipitation }}{% else %}{{ current.labels.details }}{% endif %}</span>
             </div>
           </div>
           {% endif %}
@@ -176,21 +176,21 @@
             <div class="meta"></div>
             <div class="content">
               <span class="value value--xsmall lg:value--base">{{ tomorrow.condition_label }}</span>
-              <span class="label">Tomorrow</span>
+              <span class="label">{{ current.labels.tomorrow }}</span>
             </div>
           </div>
           <div class="item grow">
             <div class="meta"></div>
             <div class="content">
               <span class="value value--xsmall lg:value--small">{% if tomorrow.templow != nil %}{{ tomorrow.templow }}° – {% endif %}{{ tomorrow.temperature }}°</span>
-              <span class="label">{% if tomorrow.templow != nil %}L/H{% else %}High{% endif %}</span>
+              <span class="label">{% if tomorrow.templow != nil %}{{ current.labels.low_high }}{% else %}{{ current.labels.high }}{% endif %}</span>
             </div>
           </div>
           <div class="item grow">
             <div class="meta"></div>
             <div class="content">
               <span class="value value--xsmall lg:value--small">{% if tomorrow.uv_index != nil %}{{ tomorrow.uv_label }} ({{ tomorrow.uv_index }}){% elsif tomorrow.precipitation_probability != nil %}{{ tomorrow.precipitation_probability }}%{% else %}—{% endif %}</span>
-              <span class="label">{% if tomorrow.uv_index != nil %}UV{% elsif tomorrow.precipitation_probability != nil %}Precipitation{% else %}Details{% endif %}</span>
+              <span class="label">{% if tomorrow.uv_index != nil %}{{ current.labels.uv }}{% elsif tomorrow.precipitation_probability != nil %}{{ current.labels.precipitation }}{% else %}{{ current.labels.details }}{% endif %}</span>
             </div>
           </div>
           {% endif %}
@@ -215,7 +215,7 @@
             <div class="meta"></div>
             <div class="content">
               <span class="value value--xxlarge lg:value--giga lg:portrait:value--mega" data-fit-value="true">{{ current.temperature }}°</span>
-              <span class="label">Temperature</span>
+              <span class="label">{{ current.labels.temperature }}</span>
               <span class="label">{{ current.updated_at }}</span>
             </div>
           </div>
@@ -231,21 +231,21 @@
             <div class="meta"></div>
             <div class="content">
               <span class="value value--small lg:value--base">{% if forloop.first %}{{ current.condition_label }}{% else %}{{ day.condition_label }}{% endif %}</span>
-              <span class="label">{% if forloop.first %}Right Now{% else %}Tomorrow{% endif %}</span>
+              <span class="label">{% if forloop.first %}{{ current.labels.right_now }}{% else %}{{ current.labels.tomorrow }}{% endif %}</span>
             </div>
           </div>
           <div class="item">
             <div class="meta"></div>
             <div class="content">
               <span class="value value--xsmall lg:value--small lg:portrait:value--small">{% if day.templow != nil %}{{ day.templow }}° – {% endif %}{{ day.temperature }}°</span>
-              <span class="label">{% if day.templow != nil %}L/H{% else %}High{% endif %}</span>
+              <span class="label">{% if day.templow != nil %}{{ current.labels.low_high }}{% else %}{{ current.labels.high }}{% endif %}</span>
             </div>
           </div>
           <div class="item">
             <div class="meta"></div>
             <div class="content">
               <span class="value value--xsmall lg:value--small lg:portrait:value--small">{% if day.uv_index != nil %}{{ day.uv_label }} ({{ day.uv_index }}){% elsif day.precipitation_probability != nil %}{{ day.precipitation_probability }}%{% else %}—{% endif %}</span>
-              <span class="label">{% if day.uv_index != nil %}UV{% elsif day.precipitation_probability != nil %}Precipitation{% else %}Details{% endif %}</span>
+              <span class="label">{% if day.uv_index != nil %}{{ current.labels.uv }}{% elsif day.precipitation_probability != nil %}{{ current.labels.precipitation }}{% else %}{{ current.labels.details }}{% endif %}</span>
             </div>
           </div>
         </div>
@@ -272,7 +272,7 @@
               <div class="meta"></div>
               <div class="content">
                 <span class="value value--xsmall lg:value--base">{{ current.condition_label }}</span>
-                <span class="label hidden lg:visible">Right Now</span>
+                <span class="label hidden lg:visible">{{ current.labels.right_now }}</span>
               </div>
             </div>
           </div>
@@ -282,7 +282,7 @@
             <div class="meta"></div>
             <div class="content">
               <span class="value value--large lg:value--xxxlarge" data-fit-value="true">{{ current.temperature }}°</span>
-              <span class="label hidden lg:visible">Temperature</span>
+              <span class="label hidden lg:visible">{{ current.labels.temperature }}</span>
             </div>
           </div>
           <div class="visible lg:hidden lg:portrait:flex h--full">
@@ -290,7 +290,7 @@
               <div class="meta"></div>
               <div class="content">
                 <span class="value value--xsmall lg:portrait:value--base">{{ current.condition_label }}</span>
-                <span class="label hidden lg:visible">Right Now</span>
+                <span class="label hidden lg:visible">{{ current.labels.right_now }}</span>
               </div>
             </div>
           </div>
@@ -299,14 +299,14 @@
             <div class="meta"></div>
             <div class="content">
               <span class="value value--xxsmall lg:value--small">{% if today.templow != nil %}{{ today.templow }}° – {% endif %}{{ today.temperature }}°</span>
-              <span class="label hidden lg:visible">{% if today.templow != nil %}L/H{% else %}High{% endif %}</span>
+              <span class="label hidden lg:visible">{% if today.templow != nil %}{{ current.labels.low_high }}{% else %}{{ current.labels.high }}{% endif %}</span>
             </div>
           </div>
           <div class="item">
             <div class="meta"></div>
             <div class="content">
               <span class="value value--xxsmall lg:value--small">{% if today.uv_index != nil %}{{ today.uv_label }} ({{ today.uv_index }}){% elsif today.precipitation_probability != nil %}{{ today.precipitation_probability }}%{% else %}—{% endif %}</span>
-              <span class="label hidden lg:visible">{% if today.uv_index != nil %}UV{% elsif today.precipitation_probability != nil %}Precipitation{% else %}Details{% endif %}</span>
+              <span class="label hidden lg:visible">{% if today.uv_index != nil %}{{ current.labels.uv }}{% elsif today.precipitation_probability != nil %}{{ current.labels.precipitation }}{% else %}{{ current.labels.details }}{% endif %}</span>
             </div>
           </div>
           {% endif %}
