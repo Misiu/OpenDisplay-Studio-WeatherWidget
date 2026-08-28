@@ -65,6 +65,9 @@ translations. Widget presentation terms come from `translations/<language>.json`
 with English fallback. All other values preserve Home Assistant's public field
 names.
 
+`showEntityId` hides the right-side entity label without removing the update
+time. `showFooter` hides the entire footer. Both options default to visible.
+
 `icon` is a local Material Design Icons class name such as
 `mdi-weather-rainy`. The template combines it with the global `mdi` class
 provided by OpenDisplay Studio Renderer. Weather rendering never downloads

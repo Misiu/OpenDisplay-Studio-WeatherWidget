@@ -118,11 +118,15 @@
       </div>
       {% endif %}
     </div>
+    {% if config.showFooter %}
     <div class="title_bar">
       <span class="mdi mdi-weather-partly-cloudy" aria-hidden="true"></span>
       <h1 class="title">{{ current.labels.weather }}</h1>
+      {% if config.showEntityId %}
       <span class="instance">{{ current.name }}</span>
+      {% endif %}
     </div>
+    {% endif %}
   </section>
 
   <section class="od-weather__composition od-weather__composition--wide" data-weather-composition="wide">
@@ -193,11 +197,15 @@
         </div>
       </div>
     </div>
+    {% if config.showFooter %}
     <div class="title_bar">
       <span class="mdi mdi-weather-partly-cloudy" aria-hidden="true"></span>
       <h1 class="title">{{ current.updated_at }}</h1>
+      {% if config.showEntityId %}
       <span class="instance">{{ current.name }}</span>
+      {% endif %}
     </div>
+    {% endif %}
   </section>
 
   <section class="od-weather__composition od-weather__composition--tall" data-weather-composition="tall">
@@ -249,11 +257,15 @@
       </div>
       {% endif %}
     </div>
+    {% if config.showFooter %}
     <div class="title_bar">
       <span class="mdi mdi-weather-partly-cloudy" aria-hidden="true"></span>
       <h1 class="title">{{ current.updated_at }}</h1>
+      {% if config.showEntityId %}
       <span class="instance">{{ current.name }}</span>
+      {% endif %}
     </div>
+    {% endif %}
   </section>
 
   <section class="od-weather__composition od-weather__composition--compact" data-weather-composition="compact">
@@ -309,11 +321,15 @@
         </div>
       </div>
     </div>
+    {% if config.showFooter %}
     <div class="title_bar">
       <span class="mdi mdi-weather-partly-cloudy" aria-hidden="true"></span>
       <h1 class="title">{{ current.updated_at }}</h1>
+      {% if config.showEntityId %}
       <span class="instance">{{ current.name }}</span>
+      {% endif %}
     </div>
+    {% endif %}
   </section>
 
   <section class="od-weather__composition od-weather__composition--strip" data-weather-composition="strip">
@@ -327,11 +343,15 @@
         </div>
       </div>
     </div>
+    {% if config.showFooter %}
     <div class="title_bar">
       <span class="mdi mdi-weather-partly-cloudy" aria-hidden="true"></span>
       <h1 class="title">{{ current.updated_at }}</h1>
+      {% if config.showEntityId %}
       <span class="instance">{{ current.name }}</span>
+      {% endif %}
     </div>
+    {% endif %}
   </section>
 
   <section class="od-weather__composition od-weather__composition--minimal" data-weather-composition="minimal">
@@ -341,11 +361,15 @@
         <span class="value">{{ current.temperature }}°</span>
       </div>
     </div>
+    {% if config.showFooter %}
     <div class="title_bar">
       <span class="mdi mdi-weather-partly-cloudy" aria-hidden="true"></span>
       <h1 class="title">{{ current.updated_at }}</h1>
+      {% if config.showEntityId %}
       <span class="instance">{{ current.name }}</span>
+      {% endif %}
     </div>
+    {% endif %}
   </section>
 </div>
 

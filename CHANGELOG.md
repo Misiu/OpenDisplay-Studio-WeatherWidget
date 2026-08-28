@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.6.1
+
+- Add independent options for hiding the entity label or the complete footer.
+- Keep the footer enabled by default and preserve the entity update time.
+
 ## 0.6.0
 
 - Replace every remote TRMNL Weather image with locally bundled Material
