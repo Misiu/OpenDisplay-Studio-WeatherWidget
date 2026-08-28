@@ -4,7 +4,7 @@ data:
     name: Tromsø
     condition: snowy
     condition_label: Snow showers
-    icon: https://trmnl.com/images/plugins/weather/wi-snow.svg
+    icon: mdi-weather-snowy
     temperature: -8
     temperature_unit: "°C"
     apparent_temperature: -15
@@ -36,7 +36,7 @@ data:
         date_label: Fri
         condition: snowy
         condition_label: Heavy snow
-        icon: https://trmnl.com/images/plugins/weather/wi-snow-wind.svg
+        icon: mdi-weather-snowy
         templow: -14
         temperature: -6
         uv_index: 0
@@ -46,7 +46,7 @@ data:
         date_label: Sat
         condition: cloudy
         condition_label: Cloudy
-        icon: https://trmnl.com/images/plugins/weather/wi-cloudy.svg
+        icon: mdi-weather-cloudy
         templow: -16
         temperature: -9
         uv_index: 0

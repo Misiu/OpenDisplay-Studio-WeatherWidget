@@ -22,24 +22,22 @@ from homeassistant.util import dt as dt_util
 LOGGER_NAME = "custom_components.opendisplay_studio"
 LOGGER = logging.getLogger(LOGGER_NAME)
 TRANSLATIONS_DIRECTORY = Path(__file__).with_name("translations")
-WEATHER_ICON_BASE_URL = "https://trmnl.com/images/plugins/weather"
-
 WEATHER_CONDITION_ICONS = {
-    "clear-night": "wi-night-clear.svg",
-    "cloudy": "wi-cloudy.svg",
-    "exceptional": "wi-na.svg",
-    "fog": "wi-fog.svg",
-    "hail": "wi-hail.svg",
-    "lightning": "wi-lightning.svg",
-    "lightning-rainy": "wi-thunderstorm.svg",
-    "partlycloudy": "wi-day-cloudy.svg",
-    "pouring": "wi-rain-wind.svg",
-    "rainy": "wi-rain.svg",
-    "snowy": "wi-snow.svg",
-    "snowy-rainy": "wi-rain-mix.svg",
-    "sunny": "wi-day-sunny.svg",
-    "windy": "wi-strong-wind.svg",
-    "windy-variant": "wi-cloudy-windy.svg",
+    "clear-night": "mdi-weather-night",
+    "cloudy": "mdi-weather-cloudy",
+    "exceptional": "mdi-alert-circle-outline",
+    "fog": "mdi-weather-fog",
+    "hail": "mdi-weather-hail",
+    "lightning": "mdi-weather-lightning",
+    "lightning-rainy": "mdi-weather-lightning-rainy",
+    "partlycloudy": "mdi-weather-partly-cloudy",
+    "pouring": "mdi-weather-pouring",
+    "rainy": "mdi-weather-rainy",
+    "snowy": "mdi-weather-snowy",
+    "snowy-rainy": "mdi-weather-snowy-rainy",
+    "sunny": "mdi-white-balance-sunny",
+    "windy": "mdi-weather-windy",
+    "windy-variant": "mdi-weather-windy-variant",
 }
 
 
@@ -122,8 +120,7 @@ class WeatherLocalizer:
 
 def _weather_icon(condition: str) -> str:
     """Map a Home Assistant condition to the widget's weather icon."""
-    filename = WEATHER_CONDITION_ICONS.get(condition, "wi-na.svg")
-    return f"{WEATHER_ICON_BASE_URL}/{filename}"
+    return WEATHER_CONDITION_ICONS.get(condition, "mdi-alert-circle-outline")
 
 
 def _placeholder(entity_id: str, localizer: WeatherLocalizer) -> dict[str, Any]:

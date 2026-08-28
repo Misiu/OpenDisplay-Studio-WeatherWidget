@@ -4,7 +4,7 @@ data:
     name: Home
     condition: cloudy
     condition_label: Pochmurno
-    icon: https://trmnl.com/images/plugins/weather/wi-cloudy.svg
+    icon: mdi-weather-cloudy
     temperature: 16
     temperature_unit: "°C"
     apparent_temperature: null
@@ -36,7 +36,7 @@ data:
         date_label: Today
         condition: cloudy
         condition_label: Cloudy
-        icon: https://trmnl.com/images/plugins/weather/wi-cloudy.svg
+        icon: mdi-weather-cloudy
         templow: null
         temperature: 19
         uv_index: null
@@ -46,7 +46,7 @@ data:
         date_label: Tomorrow
         condition: rainy
         condition_label: Rain
-        icon: https://trmnl.com/images/plugins/weather/wi-rain.svg
+        icon: mdi-weather-rainy
         templow: null
         temperature: 17
         uv_index: null

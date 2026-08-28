@@ -24,7 +24,7 @@ data:
     name: Home
     condition: partlycloudy
     condition_label: Partly cloudy
-    icon: https://example.test/weather/partly-cloudy.svg
+    icon: mdi-weather-partly-cloudy
     temperature: 18
     temperature_unit: "°C"
     apparent_temperature: 17 # null when unsupported
@@ -40,7 +40,7 @@ data:
         date_label: Today
         condition: rainy
         condition_label: Rain
-        icon: https://example.test/weather/rain.svg
+        icon: mdi-weather-rainy
         temperature: 20
         templow: 13                    # null when unsupported
         uv_index: 3                    # null when unsupported
@@ -49,8 +49,8 @@ data:
 ```
 
 The provider must include every documented key. Unsupported optional values are
-represented by `null`; they must not be omitted because widget rendering uses
-strict Liquid variables.
+represented by `null`; keeping a total provider contract makes CLI and Home
+Assistant rendering deterministic.
 
 Home Assistant guarantees the current temperature and unit for an available
 weather entity. Other current attributes are provider-dependent. Daily forecast
@@ -64,6 +64,11 @@ provider. Weather conditions and attribute labels reuse Home Assistant's
 translations. Widget presentation terms come from `translations/<language>.json`
 with English fallback. All other values preserve Home Assistant's public field
 names.
+
+`icon` is a local Material Design Icons class name such as
+`mdi-weather-rainy`. The template combines it with the global `mdi` class
+provided by OpenDisplay Studio Renderer. Weather rendering never downloads
+remote images.
 
 References:
 

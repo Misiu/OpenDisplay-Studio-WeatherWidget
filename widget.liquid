@@ -1,9 +1,5 @@
 {% assign current = data.weather %}
-{% if current contains 'forecast' %}
-  {% assign forecast = current.forecast %}
-{% else %}
-  {% assign forecast = nil %}
-{% endif %}
+{% assign forecast = current.forecast %}
 {% assign today = nil %}
 {% assign tomorrow = nil %}
 {% for forecast_day in forecast limit: 2 %}
@@ -19,7 +15,7 @@
     <div class="layout layout--col gap--space-between">
       <div class="grid grid--cols-6">
         <div class="row row--center col--span-2 portrait:col--span-6 col--end">
-          <img class="image--adaptive w--[22cqw] h--auto portrait:w--auto portrait:h--[40cqh] lg:w--[28cqw] lg:h--[28cqw] lg:portrait:w--auto lg:portrait:h--[33cqh]" alt="{{ current.condition_label }}" src="{{ current.icon }}">
+          <span class="mdi {{ current.icon }} od-weather__condition-icon od-weather__condition-icon--hero" aria-label="{{ current.condition_label }}"></span>
         </div>
         <div class="col col--span-2 portrait:col--span-3 col--end">
           <div class="item grow">
@@ -35,7 +31,7 @@
           <div class="item">
             <div class="meta"></div>
             <div class="icon">
-              <img class="image--adaptive w--[6cqw] h--[6cqw] portrait:w--[10cqw] portrait:h--[10cqw]" alt="{{ current.labels.temperature }}" src="https://trmnl.com/images/plugins/weather/wi-thermometer.svg">
+              <span class="mdi mdi-thermometer od-weather__detail-icon" aria-label="{{ current.labels.temperature }}"></span>
             </div>
             <div class="content">
               <span class="value value--xsmall lg:value--large">{{ current.apparent_temperature }}°</span>
@@ -47,7 +43,7 @@
           <div class="item">
             <div class="meta"></div>
             <div class="icon">
-              <img class="image--adaptive w--[6cqw] h--[6cqw] portrait:w--[10cqw] portrait:h--[10cqw]" alt="{{ current.labels.humidity }}" src="https://trmnl.com/images/plugins/weather/wi-raindrops.svg">
+              <span class="mdi mdi-water-percent od-weather__detail-icon" aria-label="{{ current.labels.humidity }}"></span>
             </div>
             <div class="content">
               <span class="value value--xsmall lg:value--large">{{ current.humidity }}%</span>
@@ -58,7 +54,7 @@
           <div class="item">
             <div class="meta"></div>
             <div class="icon">
-              <img class="image--adaptive w--[6cqw] h--[6cqw] portrait:w--[10cqw] portrait:h--[10cqw]" alt="{{ current.condition_label }}" src="{{ current.icon }}">
+              <span class="mdi {{ current.icon }} od-weather__detail-icon" aria-label="{{ current.condition_label }}"></span>
             </div>
             <div class="content">
               <span class="value value--xsmall lg:value--base">{{ current.condition_label }}</span>
@@ -77,7 +73,7 @@
             <div class="item col--span-3 grow">
               <div class="meta"></div>
               <div class="icon">
-                <img class="image--adaptive w--[6cqw] h--[6cqw] portrait:w--[10cqw] portrait:h--[10cqw]" alt="{{ day.condition_label }}" src="{{ day.icon }}">
+                <span class="mdi {{ day.icon }} od-weather__detail-icon" aria-label="{{ day.condition_label }}"></span>
               </div>
               <div class="content">
                 <span class="value value--xsmall lg:value--base">{{ day.condition_label }}</span>
@@ -88,7 +84,7 @@
             <div class="item col--span-3 grow">
               <div class="meta"></div>
               <div class="icon portrait:hidden">
-                <img class="image--adaptive w--[6cqw] h--[6cqw] portrait:w--[10cqw] portrait:h--[10cqw]" alt="{% if day.uv_index != nil %}{{ current.labels.uv }}{% else %}{{ current.labels.precipitation }}{% endif %}" src="{% if day.uv_index != nil %}https://trmnl.com/images/plugins/weather/wi-hot.svg{% else %}https://trmnl.com/images/plugins/weather/wi-raindrops.svg{% endif %}">
+                <span class="mdi {% if day.uv_index != nil %}mdi-weather-sunny-alert{% else %}mdi-water-percent{% endif %} od-weather__detail-icon" aria-label="{% if day.uv_index != nil %}{{ current.labels.uv }}{% else %}{{ current.labels.precipitation }}{% endif %}"></span>
               </div>
               <div class="content">
                 <span class="value value--xsmall lg:value--base">{% if day.uv_index != nil %}{{ day.uv_label }} ({{ day.uv_index }}){% else %}{{ day.precipitation_probability }}%{% endif %}</span>
@@ -100,7 +96,7 @@
               <div class="item">
                 <div class="meta"></div>
                 <div class="icon portrait:hidden">
-                  <img class="image--adaptive w--[6cqw] h--[6cqw] portrait:w--[10cqw] portrait:h--[10cqw]" alt="{{ current.labels.temperature }}" src="https://trmnl.com/images/plugins/weather/wi-thermometer.svg">
+                  <span class="mdi mdi-thermometer od-weather__detail-icon" aria-label="{{ current.labels.temperature }}"></span>
                 </div>
                 <div class="content">
                   <div class="flex flex--row gap--xlarge portrait:gap">
@@ -123,7 +119,7 @@
       {% endif %}
     </div>
     <div class="title_bar">
-      <img class="image image--adaptive" alt="" src="https://trmnl.com/images/plugins/weather--render.svg">
+      <span class="mdi mdi-weather-partly-cloudy" aria-hidden="true"></span>
       <h1 class="title">{{ current.labels.weather }}</h1>
       <span class="instance">{{ current.name }}</span>
     </div>
@@ -133,7 +129,7 @@
     <div class="layout layout--col gap--space-between">
       <div class="grid grid--cols-4">
         <div class="row row--center lg:col">
-          <img class="image--adaptive w--[22cqw] h--auto lg:w--[24cqw] lg:h--[24cqw]" alt="{{ current.condition_label }}" src="{{ current.icon }}">
+          <span class="mdi {{ current.icon }} od-weather__condition-icon od-weather__condition-icon--hero" aria-label="{{ current.condition_label }}"></span>
         </div>
         <div class="col">
           <div class="item grow">
@@ -198,7 +194,7 @@
       </div>
     </div>
     <div class="title_bar">
-      <img class="image image--adaptive" alt="" src="https://trmnl.com/images/plugins/weather--render.svg">
+      <span class="mdi mdi-weather-partly-cloudy" aria-hidden="true"></span>
       <h1 class="title">{{ current.updated_at }}</h1>
       <span class="instance">{{ current.name }}</span>
     </div>
@@ -208,7 +204,7 @@
     <div class="layout layout--col gap--space-between">
       <div class="grid grid--cols-2 portrait:grid--cols-1">
         <div class="row row--center">
-          <img class="image--adaptive w--[46cqw] h--[46cqw] portrait:w--auto portrait:h--[22cqh] lg:w--[46cqw] lg:h--[46cqw] lg:portrait:w--auto lg:portrait:h--[32cqh]" alt="{{ current.condition_label }}" src="{{ current.icon }}">
+          <span class="mdi {{ current.icon }} od-weather__condition-icon od-weather__condition-icon--hero" aria-label="{{ current.condition_label }}"></span>
         </div>
         <div class="col">
           <div class="item grow">
@@ -254,7 +250,7 @@
       {% endif %}
     </div>
     <div class="title_bar">
-      <img class="image image--adaptive" alt="" src="https://trmnl.com/images/plugins/weather--render.svg">
+      <span class="mdi mdi-weather-partly-cloudy" aria-hidden="true"></span>
       <h1 class="title">{{ current.updated_at }}</h1>
       <span class="instance">{{ current.name }}</span>
     </div>
@@ -265,7 +261,7 @@
       <div class="grid grid--cols-2 portrait:grid--cols-1 gap--none lg:portrait:gap">
         <div class="col">
           <div class="row row--center">
-            <img class="image--adaptive w--[46cqw] h--auto portrait:w--auto portrait:h--[50cqh] lg:w--[46cqw] lg:h--[46cqw] lg:portrait:w--auto lg:portrait:h--[46cqh]" alt="{{ current.condition_label }}" src="{{ current.icon }}">
+            <span class="mdi {{ current.icon }} od-weather__condition-icon od-weather__condition-icon--hero" aria-label="{{ current.condition_label }}"></span>
           </div>
           <div class="hidden lg:flex lg:portrait:hidden h--full">
             <div class="item grow">
@@ -314,7 +310,7 @@
       </div>
     </div>
     <div class="title_bar">
-      <img class="image image--adaptive" alt="" src="https://trmnl.com/images/plugins/weather--render.svg">
+      <span class="mdi mdi-weather-partly-cloudy" aria-hidden="true"></span>
       <h1 class="title">{{ current.updated_at }}</h1>
       <span class="instance">{{ current.name }}</span>
     </div>
@@ -323,7 +319,7 @@
   <section class="od-weather__composition od-weather__composition--strip" data-weather-composition="strip">
     <div class="layout">
       <div class="od-weather__strip-content">
-        <img class="image--adaptive" alt="{{ current.condition_label }}" src="{{ current.icon }}">
+        <span class="mdi {{ current.icon }} od-weather__condition-icon" aria-label="{{ current.condition_label }}"></span>
         <span class="value value--tnums" data-fit-value="true">{{ current.temperature }}°</span>
         <div class="od-weather__strip-summary">
           <span class="value">{{ current.condition_label }}</span>
@@ -332,7 +328,7 @@
       </div>
     </div>
     <div class="title_bar">
-      <img class="image image--adaptive" alt="" src="https://trmnl.com/images/plugins/weather--render.svg">
+      <span class="mdi mdi-weather-partly-cloudy" aria-hidden="true"></span>
       <h1 class="title">{{ current.updated_at }}</h1>
       <span class="instance">{{ current.name }}</span>
     </div>
@@ -341,12 +337,12 @@
   <section class="od-weather__composition od-weather__composition--minimal" data-weather-composition="minimal">
     <div class="layout">
       <div class="od-weather__minimal-content">
-        <img class="image--adaptive" alt="{{ current.condition_label }}" src="{{ current.icon }}">
+        <span class="mdi {{ current.icon }} od-weather__condition-icon" aria-label="{{ current.condition_label }}"></span>
         <span class="value">{{ current.temperature }}°</span>
       </div>
     </div>
     <div class="title_bar">
-      <img class="image image--adaptive" alt="" src="https://trmnl.com/images/plugins/weather--render.svg">
+      <span class="mdi mdi-weather-partly-cloudy" aria-hidden="true"></span>
       <h1 class="title">{{ current.updated_at }}</h1>
       <span class="instance">{{ current.name }}</span>
     </div>
@@ -387,8 +383,32 @@
     height: var(--title-bar-small-height);
   }
 
-  .od-weather__composition:not(.od-weather__composition--expansive) > .title_bar img {
-    height: var(--title-bar-small-image-height);
+  .od-weather .title_bar > .mdi {
+    display: inline-flex;
+    align-items: center;
+    font-size: var(--title-bar-image-height);
+    line-height: 1;
+  }
+
+  .od-weather__composition:not(.od-weather__composition--expansive) > .title_bar > .mdi {
+    font-size: var(--title-bar-small-image-height);
+  }
+
+  .od-weather__condition-icon,
+  .od-weather__detail-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    line-height: 1;
+  }
+
+  .od-weather__condition-icon--hero {
+    font-size: min(46cqw, 46cqh, 180px);
+  }
+
+  .od-weather__detail-icon {
+    font-size: clamp(20px, 6cqw, 64px);
   }
 
   .od-weather__composition--compact {
@@ -419,11 +439,9 @@
     overflow: hidden;
   }
 
-  .od-weather__strip-content > img {
-    width: min(21cqw, 88px);
-    height: min(62cqh, 88px);
+  .od-weather__strip-content > .od-weather__condition-icon {
+    font-size: min(21cqw, 62cqh, 88px);
     flex: 0 1 auto;
-    object-fit: contain;
   }
 
   .od-weather__strip-content > .value {
@@ -451,10 +469,8 @@
     text-overflow: ellipsis;
   }
 
-  .od-weather__minimal-content img {
-    width: min(78cqw, 145px);
-    height: min(60cqh, 120px);
-    object-fit: contain;
+  .od-weather__minimal-content .od-weather__condition-icon {
+    font-size: min(78cqw, 60cqh, 145px);
   }
 
   .od-weather__minimal-content .value {
@@ -511,9 +527,8 @@
       grid-template-columns: minmax(0, 1fr);
     }
 
-    .od-weather__composition--compact .row img {
-      width: auto;
-      height: min(38cqh, 160px);
+    .od-weather__composition--compact .row .od-weather__condition-icon {
+      font-size: min(76cqw, 38cqh, 160px);
     }
   }
 </style>

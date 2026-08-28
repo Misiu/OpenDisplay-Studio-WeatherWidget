@@ -4,7 +4,7 @@ data:
     name: Phoenix Downtown
     condition: sunny
     condition_label: Sunny
-    icon: https://trmnl.com/images/plugins/weather/wi-hot.svg
+    icon: mdi-white-balance-sunny
     temperature: 43
     temperature_unit: "°C"
     apparent_temperature: 47
@@ -36,7 +36,7 @@ data:
         date_label: Today
         condition: sunny
         condition_label: Sunny
-        icon: https://trmnl.com/images/plugins/weather/wi-day-sunny.svg
+        icon: mdi-white-balance-sunny
         templow: 31
         temperature: 45
         uv_index: 11
@@ -46,7 +46,7 @@ data:
         date_label: Tomorrow
         condition: partlycloudy
         condition_label: Mostly sunny
-        icon: https://trmnl.com/images/plugins/weather/wi-day-sunny-overcast.svg
+        icon: mdi-weather-partly-cloudy
         templow: 30
         temperature: 44
         uv_index: 10

@@ -4,7 +4,7 @@ data:
     name: Piła
     condition: pouring
     condition_label: Heavy rain
-    icon: https://trmnl.com/images/plugins/weather/wi-rain.svg
+    icon: mdi-weather-rainy
     temperature: 12
     temperature_unit: "°C"
     apparent_temperature: 9
@@ -36,7 +36,7 @@ data:
         date_label: Tue
         condition: rainy
         condition_label: Rain showers
-        icon: https://trmnl.com/images/plugins/weather/wi-showers.svg
+        icon: mdi-weather-rainy
         templow: 8
         temperature: 13
         uv_index: 1
@@ -46,7 +46,7 @@ data:
         date_label: Wed
         condition: cloudy
         condition_label: Cloudy
-        icon: https://trmnl.com/images/plugins/weather/wi-cloudy.svg
+        icon: mdi-weather-cloudy
         templow: 7
         temperature: 14
         uv_index: 2
